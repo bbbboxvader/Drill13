@@ -32,6 +32,11 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
             return
+        if event.type == SDL_KEYUP and event.key in (SDLK_LEFT, SDLK_RIGHT):
+            # 메뉴를 열기 전 누른 방향키를 메뉴 안에서 놓아도 달리기가 멈춘다.
+            import play_mode
+            play_mode.boy.handle_event(event)
+            continue
         if event.type != SDL_KEYDOWN:
             continue
         if event.key in (SDLK_0, SDLK_1, SDLK_2):
