@@ -17,6 +17,7 @@ class Boy:
         self.idle_started_at = get_time()
         self.dir = 0
         self.face_dir = 1
+        self.selected_ball = 1
         self.pressed_keys = set()
 
         self.machine = Machine(
@@ -46,7 +47,14 @@ class Boy:
     def on_enter_RUN(self):
         self.frame = 0
 
+    def select_ball(self, ball_type):
+        if ball_type not in (0, 1, 2):
+            raise ValueError('공 종류는 0, 1, 2 중 하나여야 합니다.')
+        self.selected_ball = ball_type
+
     def fire_ball(self):
+        if self.selected_ball == 0:
+            return
         ball = Ball(self.x, self.y, self.face_dir * 10)
         game_world.add_oject(ball)
 
