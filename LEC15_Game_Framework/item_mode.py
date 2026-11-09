@@ -34,6 +34,11 @@ def handle_events():
             return
         if event.type != SDL_KEYDOWN:
             continue
+        if event.key in (SDLK_0,):
+            import play_mode
+            play_mode.boy.select_ball(event.key - SDLK_0)
+            game_framework.pop_mode()
+            return
         if event.key in (SDLK_i, SDLK_ESCAPE):
             game_framework.pop_mode()
             return
